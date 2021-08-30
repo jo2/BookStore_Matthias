@@ -11,4 +11,24 @@ public class WebController {
         return "index";
     }
 
+    @GetMapping("/accounting")
+    public String accounting() {
+        return "accounting";
+    }
+
+    @GetMapping("/createBook")
+    public String createBook() {
+        return "createBook";
+    }
+
+    @GetMapping("updateBook")
+    public String updateBook() {
+        return "updateOneBook";
+    }
+
+    @GetMapping("shoppingCart")
+    public String shoppingCart() {
+        return "shoppingCart";
+    }
+
 }

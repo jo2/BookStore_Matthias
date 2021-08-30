@@ -29,65 +29,45 @@
         </div>
     </nav>
 
-    <div><h1> BookStore </h1></div>
+    <div><h1> Shopping Cart </h1></div>
     <table class="table">
         <thead>
         <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Year</th>
+            <th>Book</th>
             <th>Price</th>
             <th>Amount</th>
-            <th>Actions</th>
+            <th>Discount</th>
+            <th>Position Sum</th>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td >Book_1</td>
-            <td >Author_1</td>
-            <td >2020</td>
+            <td >Book_1 by Author_1</td>
             <td >10,00 &euro;</td>
-            <td >10</td>
-            <td>
-                <a class="btn btn-primary" role="button" href="/updateBook"> Edit </a>
-                <a class="btn btn-primary" role="button" href="/"> Add to cart </a>
-            </td>
+            <td >1</td>
+            <td >0.0</td>
+            <td >10,00 &euro;</td>
         </tr>
         <tr>
-            <td >Book_2</td>
-            <td >Author_1</td>
-            <td >2021</td>
+            <td >Book_2 by Author_1</td>
             <td >15,00 &euro;</td>
-            <td >12</td>
-            <td>
-                <a class="btn btn-primary" role="button" href="/updateBook"> Edit </a>
-                <a class="btn btn-primary" role="button" href="/"> Add to cart </a>
-            </td>
+            <td >1</td>
+            <td >0.0</td>
+            <td >15,00 &euro;</td>
         </tr>
         <tr>
-            <td >Book_3</td>
-            <td >Author_1</td>
-            <td >2018</td>
+            <td >Book_3 by Author_1</td>
             <td >20,00 &euro;</td>
-            <td >14</td>
-            <td>
-                <a class="btn btn-primary" role="button" href="/updateBook"> Edit </a>
-                <a class="btn btn-primary" role="button" href="/"> Add to cart </a>
-            </td>
-        </tr>
-        <tr>
-            <td >Book_4</td>
-            <td >Author_1</td>
-            <td >2018</td>
-            <td >25,00 &euro;</td>
-            <td >15</td>
-            <td>
-                <a class="btn btn-primary" role="button" href="/updateBook"> Edit </a>
-                <a class="btn btn-primary" role="button" href="/"> Add to cart </a>
-            </td>
+            <td >1</td>
+            <td >0.0</td>
+            <td >20,00 &euro;</td>
         </tr>
         </tbody>
     </table>
+    <span>Sum: 45.00 &euro;</span>
+    <br>
+    <a class="btn btn-success" role="button" href="/shoppingCart"> Buy </a>
+    <a class="btn btn-danger" role="button" href="/shoppingCart"> Clear Cart </a>
 
 </div>
 </body>
