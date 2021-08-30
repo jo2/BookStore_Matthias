@@ -5,15 +5,15 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.util.UUID;
 
-public class Rechnungsposition {
+public class InvoiceLineItem {
 
-    private UUID id;
+    private int id;
     @Size(min=2, max=30)
     private String bookTitle;
     @Size(min=2, max=30)
     private String bookAuthor;
     @Min(1)
-    private int bookPrice;
+    private double bookPrice;
     @Min(0)
     @Max(100)
     private double discount;
