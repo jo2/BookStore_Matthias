@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>BookStore</title>
+    <link crossorigin="anonymous"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          rel="stylesheet">
+    <style>
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">BookStore</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link" href="#">Add Book</a>
+                    <a class="nav-link" href="#">Accounting</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div><h1> BookStore </h1></div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Year</th>
+            <th>Price</th>
+            <th>Amount</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody th:remove="all-but-first">
+        <tr>
+            <td >Book_1</td>
+            <td >Author_1</td>
+            <td >2020</td>
+            <td >10,00 &euro;</td>
+            <td >10</td>
+            <td>
+                <a class="btn btn-primary" role="button" href="#"> Edit </a>
+                <a class="btn btn-primary" role="button" href="#"> Add to cart </a>
+            </td>
+        </tr>
+        <tr>
+            <td >Book_2</td>
+            <td >Author_1</td>
+            <td >2021</td>
+            <td >15,00 &euro;</td>
+            <td >12</td>
+            <td>
+                <a class="btn btn-primary" role="button" href="#"> Edit </a>
+                <a class="btn btn-primary" role="button" href="#"> Add to cart </a>
+            </td>
+        </tr>
+        <tr>
+            <td >Book_3</td>
+            <td >Author_1</td>
+            <td >2018</td>
+            <td >20,00 &euro;</td>
+            <td >14</td>
+            <td>
+                <a class="btn btn-primary" role="button" href="#"> Edit </a>
+                <a class="btn btn-primary" role="button" href="#"> Add to cart </a>
+            </td>
+        </tr>
+        <tr>
+            <td >Book_4</td>
+            <td >Author_1</td>
+            <td >2018</td>
+            <td >25,00 &euro;</td>
+            <td >15</td>
+            <td>
+                <a class="btn btn-primary" role="button" href="#"> Edit </a>
+                <a class="btn btn-primary" role="button" href="#"> Add to cart </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>
