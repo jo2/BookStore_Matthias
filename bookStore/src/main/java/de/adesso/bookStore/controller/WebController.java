@@ -31,7 +31,10 @@ public class WebController {
     }
 
     @GetMapping("/createBook")
-    public String createBook() {
+    public String createBook(Model model) {
+        //
+        model.addAttribute("book", new Book());
+        //
         return "createBook";
     }
 
@@ -50,6 +53,19 @@ public class WebController {
     @PostMapping("updateBook/{id}")
     public String updateBook(@PathVariable("id") final int id, @ModelAttribute final Book changedBook) {
         bookService.update(changedBook, id);
+        return "redirect:/";
+    }
+
+    @PostMapping("/createBook")
+    public String createBook(@ModelAttribute final Book book, final Model model) {
+        model.addAttribute("book", book);
+        bookService.save(book);
+        return "redirect:/";
+    }
+
+    @PostMapping("deleteBook/{id}")
+    public String deleteBook(@PathVariable("id") final int id) {
+        bookService.deleteById(id);
         return "redirect:/";
     }
 

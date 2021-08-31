@@ -51,6 +51,9 @@
             <td>
                 <a class="btn btn-primary" role="button" th:href="@{/updateBook/{id}(id = ${book.getId})}"> Edit </a>
                 <a class="btn btn-primary" role="button" href="/"> Add to cart </a>
+                <form method="post" th:action="@{/deleteBook/{id}(id = ${book.getId})}" >
+                    <button class="btn btn-danger" type="submit">Delete</button>
+                </form>
             </td>
         </tr>
         <tr>
@@ -60,8 +63,9 @@
             <td >15,00 &euro;</td>
             <td >12</td>
             <td>
-                <a class="btn btn-primary" role="button" href="/updateBook"> Edit </a>
+                <a class="btn btn-primary" role="button" href="/"> Edit </a>
                 <a class="btn btn-primary" role="button" href="/"> Add to cart </a>
+                <a class="btn btn-danger" role="button" href="/"> Delete </a>
             </td>
         </tr>
         <tr>
@@ -73,6 +77,7 @@
             <td>
                 <a class="btn btn-primary" type="submit" role="button" href="/updateBook"> Edit </a>
                 <a class="btn btn-primary" role="button" href="/"> Add to cart </a>
+                <a class="btn btn-danger" role="button" href="/"> Delete </a>
             </td>
         </tr>
         <tr>
@@ -84,6 +89,7 @@
             <td>
                 <a class="btn btn-primary" role="button" href="/updateBook"> Edit </a>
                 <a class="btn btn-primary" role="button" href="/"> Add to cart </a>
+                <a class="btn btn-danger" role="button" href="/"> Delete </a>
             </td>
         </tr>
         </tbody>

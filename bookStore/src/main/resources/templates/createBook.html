@@ -30,34 +30,34 @@
     </nav>
 
     <div><h3> Create new Book </h3></div>
-    <form method="post" >
+    <form method="post" th:action="@{/createBook}" th:object="${book}">
         <div class="form-row">
                 <label> Title </label>
-                <input type="text" placeholder="Title" class="form-control" >
+                <input type="text" th:field="*{title}" placeholder="Title" class="form-control" >
                 <small class="text-danger" ></small>
         </div>
         <div class="form-row">
             <label> Author </label>
-            <input type="text" placeholder="Author" class="form-control" >
+            <input type="text" th:field="*{author}" placeholder="Author" class="form-control" >
             <small class="text-danger" ></small>
         </div>
         <div class="form-row">
             <label> Year </label>
-            <input type="number" placeholder="0" class="form-control" >
+            <input type="number" th:field="*{year}" placeholder="0" class="form-control" >
             <small class="text-danger" ></small>
         </div>
         <div class="form-row">
             <label> Price </label>
-            <input type="number" placeholder="0.0" class="form-control" >
+            <input type="number" th:field="*{price}" placeholder="0.0" class="form-control" >
             <small class="text-danger" ></small>
         </div>
         <div class="form-row">
             <label> Amount </label>
-            <input type="number" placeholder="0" class="form-control" >
+            <input type="number" th:field="*{amount}" placeholder="0" class="form-control" >
             <small class="text-danger" ></small>
         </div>
 
-        <a class="btn btn-success" role="button" href="/createBook"> Confirm </a>
+        <button class="btn btn-success" type="submit">Confirm</button>
         <a class="btn btn-danger" role="button" href="/createBook"> Cancel </a>
     </form>
 

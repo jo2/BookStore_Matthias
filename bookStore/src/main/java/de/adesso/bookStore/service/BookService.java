@@ -37,4 +37,8 @@ public class BookService {
         bookRepo.save(changedBook);
     }
 
+    public void deleteById(int id) {
+        bookRepo.deleteById(id);
+    }
+
 }
