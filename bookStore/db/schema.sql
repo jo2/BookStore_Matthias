@@ -11,6 +11,14 @@ CREATE TABLE IF NOT EXISTS `book`
     amount int
 );
 
+CREATE TABLE IF NOT EXISTS `invoice`
+(
+    id int NOT NULL AUTO_INCREMENT primary key,
+    invoice_date date,
+    invoice_date_time time,
+    invoice_total double
+);
+
 CREATE TABLE IF NOT EXISTS `invoice_line_item`
 (
     id int NOT NULL AUTO_INCREMENT primary key,
@@ -18,12 +26,8 @@ CREATE TABLE IF NOT EXISTS `invoice_line_item`
     book_author varchar(20),
     book_price double,
     discount double,
-    summed_costs double
-);
-
-CREATE TABLE IF NOT EXISTS `invoice`
-(
-    id int NOT NULL AUTO_INCREMENT primary key,
-    invoice_date date,
-    invoice_date_time time
+    amount int,
+    summed_costs double,
+    invoice_id int,
+    foreign key (invoice_id) references `invoice`(id)
 );

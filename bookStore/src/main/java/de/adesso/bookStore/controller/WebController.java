@@ -32,9 +32,7 @@ public class WebController {
 
     @GetMapping("/createBook")
     public String createBook(Model model) {
-        //
         model.addAttribute("book", new Book());
-        //
         return "createBook";
     }
 

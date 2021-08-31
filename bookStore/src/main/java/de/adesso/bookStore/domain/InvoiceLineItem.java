@@ -17,5 +17,9 @@ public class InvoiceLineItem {
     @Min(0)
     @Max(100)
     private double discount;
+    @Min(0)
+    private int amount;
     private double summedCosts;
+    private int invoiceId;
+
 }
