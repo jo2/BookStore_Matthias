@@ -30,7 +30,7 @@
     </nav>
 
     <div><h3> Edit Book_1 </h3></div>
-    <form method="post" th:object="${book}">
+    <form method="post" th:action="@{/updateBook/{id}(id = ${book.getId})}" th:object="${book}">
         <div class="form-row">
             <label> Title </label>
             <input type="text" th:field="*{title}" class="form-control" >
@@ -57,8 +57,8 @@
             <small class="text-danger" ></small>
         </div>
 
-        <a class="btn btn-success" role="button" href="/updateBook"> Confirm </a>
-        <a class="btn btn-danger" role="button" href="/updateBook"> Cancel </a>
+        <button class="btn btn-success" type="submit">Confirm</button>
+        <a class="btn btn-danger" role="button" href="/"> Cancel </a>
     </form>
 
 </div>

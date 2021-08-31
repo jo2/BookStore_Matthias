@@ -31,9 +31,10 @@ public class BookService {
         bookRepo.save(book);
     }
 
-    public void update(Book book) {
-        //Book book = bookRepo.findById(book.);
-        //book
+    public void update(Book changedBook, int id) {
+        Book book = bookRepo.findById(id);
+        changedBook.setId(book.getId());
+        bookRepo.save(changedBook);
     }
 
 }
