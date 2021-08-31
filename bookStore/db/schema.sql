@@ -25,5 +25,5 @@ CREATE TABLE IF NOT EXISTS `invoice`
 (
     id int NOT NULL AUTO_INCREMENT primary key,
     invoice_date date,
-    invoice_date_time time,
+    invoice_date_time time
 );
