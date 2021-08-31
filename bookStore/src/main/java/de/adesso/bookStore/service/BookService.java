@@ -21,7 +21,10 @@ public class BookService {
 
     public List<Book> findAll() {
         return bookRepo.findAll();
-        //return new ArrayList<>();
+    }
+
+    public Book findById(int id) {
+        return bookRepo.findById(id);
     }
 
     public void save(Book book) {

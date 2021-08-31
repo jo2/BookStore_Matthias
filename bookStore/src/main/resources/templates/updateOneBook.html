@@ -30,30 +30,30 @@
     </nav>
 
     <div><h3> Edit Book_1 </h3></div>
-    <form method="post" >
+    <form method="post" th:object="${book}">
         <div class="form-row">
             <label> Title </label>
-            <input type="text" class="form-control" >
+            <input type="text" th:field="*{title}" class="form-control" >
             <small class="text-danger" ></small>
         </div>
         <div class="form-row">
             <label> Author </label>
-            <input type="text" class="form-control" >
+            <input type="text" th:field="*{author}" class="form-control" >
             <small class="text-danger" ></small>
         </div>
         <div class="form-row">
             <label> Year </label>
-            <input type="number" class="form-control" >
+            <input type="number" th:field="*{year}" class="form-control" >
             <small class="text-danger" ></small>
         </div>
         <div class="form-row">
             <label> Price </label>
-            <input type="number" class="form-control" >
+            <input type="number" th:field="*{price}" class="form-control" >
             <small class="text-danger" ></small>
         </div>
         <div class="form-row">
             <label> Amount </label>
-            <input type="number" class="form-control" >
+            <input type="number" th:field="*{amount}" class="form-control" >
             <small class="text-danger" ></small>
         </div>
 

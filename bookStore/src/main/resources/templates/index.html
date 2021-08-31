@@ -41,15 +41,15 @@
             <th>Actions</th>
         </tr>
         </thead>
-        <tbody>
-        <tr>
-            <td >Book_1</td>
-            <td >Author_1</td>
-            <td >2020</td>
-            <td >10,00 &euro;</td>
-            <td >10</td>
+        <tbody th:remove="all-but-first">
+        <tr th:each="book : ${books}">
+            <td th:text="${book.getTitle()}">Book_1</td>
+            <td th:text="${book.getAuthor()}">Author_1</td>
+            <td th:text="${book.getYear()}">2020</td>
+            <td th:text="${book.getPrice()}">10,00 &euro;</td>
+            <td th:text="${book.getAmount()}">10</td>
             <td>
-                <a class="btn btn-primary" role="button" href="/updateBook"> Edit </a>
+                <a class="btn btn-primary" role="button" th:href="@{/updateBook/{id}(id = ${book.getId})}"> Edit </a>
                 <a class="btn btn-primary" role="button" href="/"> Add to cart </a>
             </td>
         </tr>
