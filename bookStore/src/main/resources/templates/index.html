@@ -49,14 +49,16 @@
             <td th:text="${book.getPrice()}">10,00 &euro;</td>
             <td th:text="${book.getAmount()}">10</td>
             <td>
-                <a class="btn btn-primary" role="button" th:href="@{/updateBook/{id}(id = ${book.getId})}"> Edit </a>
-                <!--<a class="btn btn-primary" role="button" href="/"> Add to cart </a>-->
-                <form method="post" th:action="@{/shoppingCart/{id}(id = ${book.getId})}" >
-                    <button class="btn btn-primary" type="submit">Add to cart</button>
-                </form>
-                <form method="post" th:action="@{/deleteBook/{id}(id = ${book.getId})}">
-                    <button class="btn btn-danger" type="submit">Delete</button>
-                </form>
+                <div style="justify-content: flex-start; display: flex;">
+                    <a class="btn btn-light" role="button" th:href="@{/updateBook/{id}(id = ${book.getId})}"> Edit </a>
+                    <!--<a class="btn btn-primary" role="button" href="/"> Add to cart </a>-->
+                    <form method="post" th:action="@{/shoppingCart/{id}(id = ${book.getId})}" >
+                        <button class="btn btn-info" type="submit">Add to cart</button>
+                    </form>
+                    <form method="post" th:action="@{/deleteBook/{id}(id = ${book.getId})}">
+                        <button class="btn btn-danger" type="submit">Delete</button>
+                    </form>
+                </div>
             </td>
         </tr>
         <tr>

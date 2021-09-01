@@ -30,8 +30,11 @@
     </nav>
 
     <div><h3> Accounting </h3></div>
-    <div class="card">
+    <div class="card" th:each="invoice: ${invoices}">
         <div class="card-body">
+            <span th:text="${invoice.getInvoiceTotal()} + ': &euro;, Date: ' + ${invoice.getInvoiceDate()} + ' ' + ${invoice.getInvoiceDateTime()}">
+                Sum: 45.0 &euro;, Date: 26.08.2021 11:07
+            </span>
             <table class="table">
                 <thead>
                 <tr>
@@ -42,13 +45,14 @@
                     <th>Position Sum</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <td >Book_1 by Author_1</td>
-                    <td >10,00 &euro;</td>
-                    <td >1</td>
-                    <td >0.0</td>
-                    <td >10,00 &euro;</td>
+                <tbody th:remove="all-but-first">
+                <tr th:each="item: ${invoiceLineItemService.findItemsByInvoice(invoice)}">
+                <!--<tr th:each="item: ${invoiceLineItemService.findRecentItems()}">-->
+                    <td th:text="${item.getBookTitle()} + ' by ' + ${item.getBookAuthor()}">Book_1 by Author_1</td>
+                    <td th:text="${item.getBookPrice()} + ' &euro;'">10,00 &euro;</td>
+                    <td th:text="${item.getAmount()}">1</td>
+                    <td th:text="${item.getDiscount()}">0.0</td>
+                    <td th:text="${item.getSummedCosts()} + ' &euro;'">10,00 &euro;</td>
                 </tr>
                 <tr>
                     <td >Book_2 by Author_1</td>

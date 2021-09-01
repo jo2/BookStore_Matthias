@@ -37,7 +37,10 @@ public class WebController {
     }
 
     @GetMapping("/accounting")
-    public String accounting() {
+    public String accounting(final Model model) {
+        List<Invoice> invoices = invoiceService.findBoughtInvoices();
+        model.addAttribute("invoices", invoices);
+        model.addAttribute("invoiceLineItemService", invoiceLineItemService);
         return "accounting";
     }
 

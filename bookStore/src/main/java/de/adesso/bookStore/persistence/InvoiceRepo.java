@@ -13,5 +13,6 @@ public interface InvoiceRepo extends CrudRepository<Invoice, Integer> {
 
     List<Invoice> findAll();
     Invoice save(Invoice invoice);
+    List<Invoice> findByIdLessThan(int id);
 
 }

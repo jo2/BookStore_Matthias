@@ -1,6 +1,7 @@
 package de.adesso.bookStore.service;
 
 import de.adesso.bookStore.domain.Invoice;
+import de.adesso.bookStore.domain.InvoiceLineItem;
 import de.adesso.bookStore.persistence.InvoiceRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,16 @@ public class InvoiceService {
                 .map(Invoice::getId)
                 .max(Integer::compareTo)
                 .orElse(0);
+    }
+
+    public List<Invoice> findBoughtInvoices() {
+        List<Invoice> invoices = invoiceRepo.findByIdLessThan(findMaxId());
+        int maxId = findMaxId();
+        Invoice invoice = findById(maxId);
+        if (invoice != null && invoiceLineItemService.findRecentItems().isEmpty()) {
+            return invoiceRepo.findAll();
+        }
+        return invoices;
     }
 
     public void deleteRecentInvoice() {
