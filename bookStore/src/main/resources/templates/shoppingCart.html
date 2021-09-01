@@ -41,8 +41,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td >Book_1 by Author_1</td>
+        <tr th:each="item : ${items}">
+            <td th:text="${item.getBookTitle()}">Book_1 by Author_1</td>
             <td >10,00 &euro;</td>
             <td >1</td>
             <td >0.0</td>

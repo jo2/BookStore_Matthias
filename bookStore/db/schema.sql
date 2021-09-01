@@ -29,5 +29,6 @@ CREATE TABLE IF NOT EXISTS `invoice_line_item`
     amount int,
     summed_costs double,
     invoice_id int,
+    bought boolean,
     foreign key (invoice_id) references `invoice`(id)
 );

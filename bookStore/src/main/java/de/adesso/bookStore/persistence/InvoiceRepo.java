@@ -12,5 +12,6 @@ import java.util.List;
 public interface InvoiceRepo extends CrudRepository<Invoice, Integer> {
 
     List<Invoice> findAll();
+    Invoice save(Invoice invoice);
 
 }

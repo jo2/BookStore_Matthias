@@ -18,6 +18,6 @@ public class Invoice {
     private int id;
     private LocalDate invoiceDate;
     private LocalTime invoiceDateTime;
-    private double inoviceTotal;
+    private double invoiceTotal;
 
 }

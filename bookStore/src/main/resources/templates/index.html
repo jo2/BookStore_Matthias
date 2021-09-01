@@ -50,7 +50,10 @@
             <td th:text="${book.getAmount()}">10</td>
             <td>
                 <a class="btn btn-primary" role="button" th:href="@{/updateBook/{id}(id = ${book.getId})}"> Edit </a>
-                <a class="btn btn-primary" role="button" href="/"> Add to cart </a>
+                <!--<a class="btn btn-primary" role="button" href="/"> Add to cart </a>-->
+                <form method="post" th:action="@{/shoppingCart/{id}(id = ${book.getId})}" >
+                    <button class="btn btn-primary" type="submit">Add to cart</button>
+                </form>
                 <form method="post" th:action="@{/deleteBook/{id}(id = ${book.getId})}" >
                     <button class="btn btn-danger" type="submit">Delete</button>
                 </form>

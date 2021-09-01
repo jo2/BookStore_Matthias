@@ -1,7 +1,10 @@
 package de.adesso.bookStore.controller;
 
 import de.adesso.bookStore.domain.Book;
+import de.adesso.bookStore.domain.InvoiceLineItem;
 import de.adesso.bookStore.service.BookService;
+import de.adesso.bookStore.service.InvoiceLineItemService;
+import de.adesso.bookStore.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +20,12 @@ public class WebController {
 
     @Autowired
     BookService bookService;
+
+    @Autowired
+    InvoiceService invoiceService;
+
+    @Autowired
+    InvoiceLineItemService invoiceLineItemService;
 
     @GetMapping("/")
     public String index(final Model model) {
@@ -44,7 +53,9 @@ public class WebController {
     }
 
     @GetMapping("shoppingCart")
-    public String shoppingCart() {
+    public String shoppingCart(final Model model) {
+        List<InvoiceLineItem> items = invoiceLineItemService.findRecentItems();
+        model.addAttribute("items", items);
         return "shoppingCart";
     }
 
@@ -64,6 +75,12 @@ public class WebController {
     @PostMapping("deleteBook/{id}")
     public String deleteBook(@PathVariable("id") final int id) {
         bookService.deleteById(id);
+        return "redirect:/";
+    }
+
+    @PostMapping("shoppingCart/{bookId}")
+    public String shoppingCart(@PathVariable("bookId") final int bookId) {
+        invoiceLineItemService.fillShoppingCart(bookId);
         return "redirect:/";
     }
 
