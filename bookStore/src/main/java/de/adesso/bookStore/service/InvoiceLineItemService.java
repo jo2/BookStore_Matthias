@@ -56,4 +56,16 @@ public class InvoiceLineItemService {
         invoiceLineItemRepo.save(item);
     }
 
+    public double calculateSum(List<InvoiceLineItem> items) {
+        return items
+                .stream()
+                .map(InvoiceLineItem::getSummedCosts)
+                .mapToDouble(Double::intValue)
+                .sum();
+    }
+
+    public void clearCart() {
+        invoiceLineItemRepo.deleteByBought(false);
+    }
+
 }

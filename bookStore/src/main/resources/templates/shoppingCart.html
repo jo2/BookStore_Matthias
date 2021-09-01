@@ -40,13 +40,13 @@
             <th>Position Sum</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody th:remove="all-but-first">
         <tr th:each="item : ${items}">
-            <td th:text="${item.getBookTitle()}">Book_1 by Author_1</td>
-            <td >10,00 &euro;</td>
-            <td >1</td>
-            <td >0.0</td>
-            <td >10,00 &euro;</td>
+            <td th:text="${item.getBookTitle()} + ' by ' + ${item.getBookAuthor()}">Book_1 by Author_1</td>
+            <td th:text="${item.getBookPrice()} + ' &euro;'">10,00 &euro;</td>
+            <td th:text="${item.getAmount()}">1</td>
+            <td th:text="${item.getDiscount()}">0.0</td>
+            <td th:text="${item.getSummedCosts()} + ' &euro;'">10,00 &euro;</td>
         </tr>
         <tr>
             <td >Book_2 by Author_1</td>
@@ -64,11 +64,12 @@
         </tr>
         </tbody>
     </table>
-    <span>Sum: 45.00 &euro;</span>
+    <span th:text="'Sum: ' + ${sum}">Sum: 45.00 &euro;</span>
     <br>
     <a class="btn btn-success" role="button" href="/shoppingCart"> Buy </a>
-    <a class="btn btn-danger" role="button" href="/shoppingCart"> Clear Cart </a>
-
+    <form method="post" th:action="@{/clearCart}">
+        <button class="btn btn-danger" type="submit">Clear Cart</button>
+    </form>
 </div>
 </body>
 </html>

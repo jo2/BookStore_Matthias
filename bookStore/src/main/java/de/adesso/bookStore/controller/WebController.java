@@ -1,6 +1,7 @@
 package de.adesso.bookStore.controller;
 
 import de.adesso.bookStore.domain.Book;
+import de.adesso.bookStore.domain.Invoice;
 import de.adesso.bookStore.domain.InvoiceLineItem;
 import de.adesso.bookStore.service.BookService;
 import de.adesso.bookStore.service.InvoiceLineItemService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class WebController {
@@ -55,7 +57,9 @@ public class WebController {
     @GetMapping("shoppingCart")
     public String shoppingCart(final Model model) {
         List<InvoiceLineItem> items = invoiceLineItemService.findRecentItems();
+        double sum = invoiceLineItemService.calculateSum(items);
         model.addAttribute("items", items);
+        model.addAttribute("sum", sum);
         return "shoppingCart";
     }
 
@@ -82,6 +86,12 @@ public class WebController {
     public String shoppingCart(@PathVariable("bookId") final int bookId) {
         invoiceLineItemService.fillShoppingCart(bookId);
         return "redirect:/";
+    }
+
+    @PostMapping("clearCart")
+    public String clearCart() {
+        invoiceLineItemService.clearCart();
+        return "redirect:/shoppingCart";
     }
 
 }

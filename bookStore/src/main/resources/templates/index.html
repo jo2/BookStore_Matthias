@@ -54,7 +54,7 @@
                 <form method="post" th:action="@{/shoppingCart/{id}(id = ${book.getId})}" >
                     <button class="btn btn-primary" type="submit">Add to cart</button>
                 </form>
-                <form method="post" th:action="@{/deleteBook/{id}(id = ${book.getId})}" >
+                <form method="post" th:action="@{/deleteBook/{id}(id = ${book.getId})}">
                     <button class="btn btn-danger" type="submit">Delete</button>
                 </form>
             </td>
