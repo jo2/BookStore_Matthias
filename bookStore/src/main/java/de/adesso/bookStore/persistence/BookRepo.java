@@ -21,4 +21,6 @@ public interface BookRepo extends CrudRepository<Book, Integer> {
     @Override
     List<Book> findAll();
 
+    Book findByTitleAndAuthor(String title, String author);
+
 }

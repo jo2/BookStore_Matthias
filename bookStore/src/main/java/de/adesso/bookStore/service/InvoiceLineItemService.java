@@ -8,7 +8,6 @@ import de.adesso.bookStore.persistence.InvoiceRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,11 +26,6 @@ public class InvoiceLineItemService {
     BookService bookService;
 
     public List<InvoiceLineItem> findRecentItems() {
-        //int maxId = invoiceService.findMaxId();
-        //if (maxId < 1) {
-        //    return new ArrayList<>();
-        //}
-        //return invoiceLineItemRepo.findByInvoiceId(maxId);
         return invoiceLineItemRepo.findByBought(false);
     }
 
@@ -66,6 +60,17 @@ public class InvoiceLineItemService {
 
     public void clearCart() {
         invoiceLineItemRepo.deleteByBought(false);
+        invoiceService.deleteRecentInvoice();
+    }
+
+    public void buy() {
+        invoiceService.buy();
+        findRecentItems().forEach(item -> {
+            Book book = bookService.findByTitleAndAuthor(item.getBookTitle(), item.getBookAuthor());
+            book.setAmount(book.getAmount()-1);
+            item.setBought(true);
+            invoiceLineItemRepo.save(item);
+        });
     }
 
 }

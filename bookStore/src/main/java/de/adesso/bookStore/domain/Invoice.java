@@ -1,6 +1,7 @@
 package de.adesso.bookStore.domain;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,6 +17,7 @@ public class Invoice {
 
     @Id
     private int id;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate invoiceDate;
     private LocalTime invoiceDateTime;
     private double invoiceTotal;

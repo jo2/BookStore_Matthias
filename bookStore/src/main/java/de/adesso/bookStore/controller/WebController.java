@@ -94,4 +94,10 @@ public class WebController {
         return "redirect:/shoppingCart";
     }
 
+    @PostMapping("buy")
+    public String buy() {
+        invoiceLineItemService.buy();
+        return "redirect:/shoppingCart";
+    }
+
 }

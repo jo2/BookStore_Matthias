@@ -41,4 +41,7 @@ public class BookService {
         bookRepo.deleteById(id);
     }
 
+    public Book findByTitleAndAuthor(String bookTitle, String bookAuthor) {
+        return bookRepo.findByTitleAndAuthor(bookTitle, bookAuthor);
+    }
 }
