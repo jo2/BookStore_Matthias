@@ -34,27 +34,27 @@
         <div class="form-row">
                 <label> Title </label>
                 <input type="text" th:field="*{title}" placeholder="Title" class="form-control" >
-                <small class="text-danger" ></small>
+            <small class="text-danger" th:errors="*{title}"></small>
         </div>
         <div class="form-row">
             <label> Author </label>
             <input type="text" th:field="*{author}" placeholder="Author" class="form-control" >
-            <small class="text-danger" ></small>
+            <small class="text-danger" th:errors="*{author}"></small>
         </div>
         <div class="form-row">
             <label> Year </label>
             <input type="number" th:field="*{year}" placeholder="0" class="form-control" >
-            <small class="text-danger" ></small>
+            <small class="text-danger" th:errors="*{year}"></small>
         </div>
         <div class="form-row">
             <label> Price </label>
-            <input type="number" th:field="*{price}" placeholder="0.0" class="form-control" >
-            <small class="text-danger" ></small>
+            <input type="number" th:field="*{price}" step="0.01" placeholder="0.0" class="form-control" >
+            <small class="text-danger" th:errors="*{price}"></small>
         </div>
         <div class="form-row">
             <label> Amount </label>
             <input type="number" th:field="*{amount}" placeholder="0" class="form-control" >
-            <small class="text-danger" ></small>
+            <small class="text-danger" th:errors="*{amount}"></small>
         </div>
 
         <button class="btn btn-success" type="submit">Confirm</button>

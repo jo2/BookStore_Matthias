@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.Errors;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,4 +45,18 @@ public class BookService {
     public Book findByTitleAndAuthor(String bookTitle, String bookAuthor) {
         return bookRepo.findByTitleAndAuthor(bookTitle, bookAuthor);
     }
+
+    public void validate(Book book, Errors errors) {
+        if (bookExists(book)) {
+            errors.rejectValue("title", "title_and_author_must_be_unique",
+                    "combination of title and author must be unique");
+            errors.rejectValue("author", "title_and_author_must_be_unique",
+                    "combination of title and author must be unique");
+        }
+    }
+
+    public boolean bookExists(Book book) {
+        return findByTitleAndAuthor(book.getTitle(), book.getAuthor()) != null;
+    }
+
 }
