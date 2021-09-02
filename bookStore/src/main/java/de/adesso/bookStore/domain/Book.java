@@ -19,7 +19,7 @@ public class Book {
     private int id;
     @Size(min=2, max=30)
     private String title;
-    @Size(min=2, max=30)
+    @Size(min=2, max=20)
     private String author;
     @Min(1000)
     @Max(2050)

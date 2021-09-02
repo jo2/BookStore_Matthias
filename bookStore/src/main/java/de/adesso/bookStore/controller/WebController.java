@@ -69,7 +69,12 @@ public class WebController {
     }
 
     @PostMapping("updateBook/{id}")
-    public String updateBook(@PathVariable("id") final int id, @ModelAttribute final Book changedBook) {
+    public String updateBook(@PathVariable("id") final int id, @ModelAttribute final Book changedBook,
+                             final Errors errors) {
+        bookService.validate(changedBook, errors);
+        if (errors.hasErrors()) {
+            return "redirect:/updateBook/{id}";
+        }
         bookService.update(changedBook, id);
         return "redirect:/";
     }

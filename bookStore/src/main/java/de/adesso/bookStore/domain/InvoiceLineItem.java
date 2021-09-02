@@ -16,14 +16,15 @@ public class InvoiceLineItem {
     private int id;
     @Size(min=2, max=30)
     private String bookTitle;
-    @Size(min=2, max=30)
+    @Size(min=2, max=20)
     private String bookAuthor;
     @Min(1)
     private double bookPrice;
     @Min(0)
-    @Max(100)
+    @Max(20)
     private double discount;
-    @Min(0)
+    @Min(1)
+    @Max(6)
     private int amount;
     private double summedCosts;
     private int invoiceId;
