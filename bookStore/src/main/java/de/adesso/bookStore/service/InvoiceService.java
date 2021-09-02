@@ -49,6 +49,7 @@ public class InvoiceService {
     public Invoice findById(int id) {
         return invoiceRepo.findById(id).orElse(null);
     }
+
     public void buy() {
         int maxId = findMaxId();
         Invoice invoice = findById(maxId);

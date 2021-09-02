@@ -52,6 +52,7 @@ public class InvoiceLineItemService {
     }
 
     public double calculateSum(List<InvoiceLineItem> items) {
+        items.forEach(item -> item.setSummedCosts(item.getAmount()*item.getBookPrice()*(1-(item.getDiscount()/100.0))));
         return items
                 .stream()
                 .map(InvoiceLineItem::getSummedCosts)

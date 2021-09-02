@@ -17,7 +17,6 @@ public class Invoice {
 
     @Id
     private int id;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate invoiceDate;
     private LocalTime invoiceDateTime;
     private double invoiceTotal;
