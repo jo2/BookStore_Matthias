@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @NoArgsConstructor
@@ -22,6 +24,13 @@ public class BookService {
 
     public List<Book> findAll() {
         return bookRepo.findAll();
+    }
+
+    public List<Book> findAllSortedByTitle() {
+        return findAll()
+                .stream()
+                .sorted(Comparator.comparing(Book::getTitle).reversed())
+                .collect(Collectors.toList());
     }
 
     public Book findById(int id) {

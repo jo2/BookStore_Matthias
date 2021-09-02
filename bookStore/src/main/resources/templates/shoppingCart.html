@@ -30,7 +30,6 @@
     </nav>
 
     <div><h1> Shopping Cart </h1></div>
-    <form method="post" th:action="@{/buy}">
         <table class="table">
             <thead>
             <tr>
@@ -67,11 +66,14 @@
         </table>
         <span th:text="'Sum: ' + ${sum}">Sum: 45.00 &euro;</span>
         <br>
-            <button class="btn btn-success" type="submit">Buy</button>
-    </form>
-    <form method="post" th:action="@{/clearCart}">
-        <button class="btn btn-danger" type="submit">Clear Cart</button>
-    </form>
+    <div style="justify-content: flex-start; display: flex;">
+        <form method="post" th:action="@{/buy}">
+                <button class="btn btn-success" type="submit">Buy</button>
+        </form>
+        <form method="post" th:action="@{/clearCart}">
+            <button class="btn btn-danger" type="submit">Clear Cart</button>
+        </form>
+    </div>
 </div>
 </body>
 </html>

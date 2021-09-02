@@ -1,5 +1,6 @@
 package de.adesso.bookStore.service;
 
+import de.adesso.bookStore.domain.Book;
 import de.adesso.bookStore.domain.Invoice;
 import de.adesso.bookStore.domain.InvoiceLineItem;
 import de.adesso.bookStore.persistence.InvoiceRepo;
@@ -8,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class InvoiceService {
@@ -25,6 +28,13 @@ public class InvoiceService {
                 .map(Invoice::getId)
                 .max(Integer::compareTo)
                 .orElse(0);
+    }
+
+    public List<Invoice> findBoughtInvoicesSortedByDateTime() {
+        return findBoughtInvoices()
+                .stream()
+                .sorted(Comparator.comparing(Invoice::getInvoiceDate).reversed())
+                .collect(Collectors.toList());
     }
 
     public List<Invoice> findBoughtInvoices() {

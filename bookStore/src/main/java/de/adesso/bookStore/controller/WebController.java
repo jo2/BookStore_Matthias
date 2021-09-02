@@ -33,7 +33,7 @@ public class WebController {
 
     @GetMapping("/")
     public String index(final Model model) {
-        List<Book> books = bookService.findAll();
+        List<Book> books = bookService.findAllSortedByTitle();
         model.addAttribute("books", books);
         return "index";
     }
