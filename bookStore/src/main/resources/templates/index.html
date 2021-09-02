@@ -43,7 +43,10 @@
         </thead>
         <tbody th:remove="all-but-first">
         <tr th:each="book : ${books}">
-            <td th:text="${book.getTitle()}">Book_1</td>
+            <td><a th:href="@{/bookInfo/{id}(id = ${book.getId})}" th:text="${book.getTitle()}">
+                Book_1
+            </a>
+            </td>
             <td th:text="${book.getAuthor()}">Author_1</td>
             <td th:text="${book.getYear()}">2020</td>
             <td th:text="${book.getPrice()}">10,00 &euro;</td>

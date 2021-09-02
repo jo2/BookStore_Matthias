@@ -68,6 +68,13 @@ public class WebController {
         return "shoppingCart";
     }
 
+    @GetMapping("bookInfo/{id}")
+    public String bookInfo(@PathVariable("id") final int id, final Model model) {
+        Book book = bookService.findById(id);
+        model.addAttribute("book", book);
+        return "bookInfo";
+    }
+
     @PostMapping("updateBook/{id}")
     public String updateBook(@PathVariable("id") final int id, @ModelAttribute final Book changedBook,
                              final Errors errors) {
