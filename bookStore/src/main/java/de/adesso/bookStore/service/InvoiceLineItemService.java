@@ -7,6 +7,7 @@ import de.adesso.bookStore.persistence.InvoiceLineItemRepo;
 import de.adesso.bookStore.persistence.InvoiceRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.Errors;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,12 +67,45 @@ public class InvoiceLineItemService {
     }
 
     public void buy() {
-        invoiceService.buy();
+        List<Book> updatedBooks = new ArrayList<>();
+        /*
         findRecentItems().forEach(item -> {
             Book book = bookService.findByTitleAndAuthor(item.getBookTitle(), item.getBookAuthor());
-            book.setAmount(book.getAmount()-1);
+            if (book.getAmount() - item.getAmount() < 0) {
+                return;
+            }
+            book.setAmount(book.getAmount()- item.getAmount());
+            updatedBooks.add(book);
+        });
+
+         */
+        /*
+        for (Book updatedBook : updatedBooks) {
+            if (updatedBook.getAmount() < 0) {
+                return;
+            }
+        }
+
+         */
+
+        for (InvoiceLineItem item : findRecentItems()) {
+            Book book = bookService.findByTitleAndAuthor(item.getBookTitle(), item.getBookAuthor());
+            if (book.getAmount() - item.getAmount() < 0) {
+                return;
+            }
+            book.setAmount(book.getAmount()- item.getAmount());
+            updatedBooks.add(book);
+        }
+
+
+        System.out.println("Test");
+        invoiceService.buy();
+        findRecentItems().forEach(item -> {
             item.setBought(true);
             invoiceLineItemRepo.save(item);
+        });
+        updatedBooks.forEach(book -> {
+            bookService.save(book);
         });
     }
 
