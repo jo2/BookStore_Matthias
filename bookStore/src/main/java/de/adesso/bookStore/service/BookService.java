@@ -5,11 +5,9 @@ import de.adesso.bookStore.persistence.BookRepo;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -56,7 +54,7 @@ public class BookService {
     }
 
     public void validate(Book book, Errors errors) {
-        if (bookExists(book)) {
+        if (differentBookWithSameTitleAuthorExists(book)) {
             errors.rejectValue("title", "title_and_author_must_be_unique",
                     "combination of title and author must be unique");
             errors.rejectValue("author", "title_and_author_must_be_unique",
@@ -64,8 +62,9 @@ public class BookService {
         }
     }
 
-    public boolean bookExists(Book book) {
-        return findByTitleAndAuthor(book.getTitle(), book.getAuthor()) != null;
+    public boolean differentBookWithSameTitleAuthorExists(Book book) {
+        Book differentBook = findByTitleAndAuthor(book.getTitle(), book.getAuthor());
+        return differentBook != null && differentBook.getId() != book.getId();
     }
 
 }

@@ -57,7 +57,7 @@ public class InvoiceLineItemService {
         return items
                 .stream()
                 .map(InvoiceLineItem::getSummedCosts)
-                .mapToDouble(Double::intValue)
+                .mapToDouble(Double::doubleValue)
                 .sum();
     }
 
@@ -71,15 +71,19 @@ public class InvoiceLineItemService {
 
         for (InvoiceLineItem item : findRecentItems()) {
             Book book = bookService.findByTitleAndAuthor(item.getBookTitle(), item.getBookAuthor());
-            if (book.getAmount() - item.getAmount() < 0) {
+            Book updatedBook = new Book();
+            updatedBook.setId(book.getId());
+            updatedBook.setTitle(book.getTitle());
+            updatedBook.setAuthor(book.getAuthor());
+            updatedBook.setPrice(book.getPrice());
+            updatedBook.setYear(book.getYear());
+            updatedBook.setAmount(book.getAmount());
+            if (updatedBook.getAmount() - item.getAmount() < 0) {
                 return;
             }
-            book.setAmount(book.getAmount()- item.getAmount());
-            updatedBooks.add(book);
+            updatedBook.setAmount(updatedBook.getAmount()- item.getAmount());
+            updatedBooks.add(updatedBook);
         }
-
-
-        System.out.println("Test");
         invoiceService.buy();
         findRecentItems().forEach(item -> {
             item.setBought(true);
