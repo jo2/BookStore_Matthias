@@ -42,12 +42,23 @@
             </thead>
             <tbody th:remove="all-but-first">
             <tr th:each="item : ${items}">
+                <form method="post" th:action="@{/modifyCart}">
                 <td th:text="${item.getBookTitle()} + ' by ' + ${item.getBookAuthor()}">Book_1 by Author_1</td>
                 <td th:text="${item.getBookPrice()} + ' &euro;'">10,00 &euro;</td>
-                <td ><input type="number" th:value="*{item.amount}" class="form-control" ></td>
-                <td ><input type="number" th:value="*{item.discount}" class="form-control" ></td>
+                <input type="hidden" name="id" th:value="*{item.id}" class="form-control" >
+                <input type="hidden" name="bookTitle" th:value="*{item.bookTitle}" class="form-control" >
+                <input type="hidden" name="bookAuthor" th:value="*{item.bookAuthor}" class="form-control" >
+                <input type="hidden" name="bookPrice" th:value="*{item.bookPrice}" class="form-control" >
+                <input type="hidden" name="bookPrice" th:value="*{item.bookPrice}" class="form-control" >
+                <input type="hidden" name="summedCosts" th:value="*{item.summedCosts}" class="form-control" >
+                <input type="hidden" name="invoiceId" th:value="*{item.invoiceId}" class="form-control" >
+                <input type="hidden" name="bought" th:value="*{item.bought}" class="form-control" >
+                <td ><input type="number" name="amount" th:value="*{item.amount}" class="form-control" onchange="this.form.submit()"></td>
+                <td ><input type="number" name="discount" th:value="*{item.discount}" class="form-control" onchange="this.form.submit()"></td>
                 <td th:text="${item.getSummedCosts()} + ' &euro;'">10,00 &euro;</td>
+                </form>
             </tr>
+
             <tr>
                 <td >Book_2 by Author_1</td>
                 <td >15,00 &euro;</td>

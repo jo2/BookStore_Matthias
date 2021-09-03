@@ -68,25 +68,6 @@ public class InvoiceLineItemService {
 
     public void buy() {
         List<Book> updatedBooks = new ArrayList<>();
-        /*
-        findRecentItems().forEach(item -> {
-            Book book = bookService.findByTitleAndAuthor(item.getBookTitle(), item.getBookAuthor());
-            if (book.getAmount() - item.getAmount() < 0) {
-                return;
-            }
-            book.setAmount(book.getAmount()- item.getAmount());
-            updatedBooks.add(book);
-        });
-
-         */
-        /*
-        for (Book updatedBook : updatedBooks) {
-            if (updatedBook.getAmount() < 0) {
-                return;
-            }
-        }
-
-         */
 
         for (InvoiceLineItem item : findRecentItems()) {
             Book book = bookService.findByTitleAndAuthor(item.getBookTitle(), item.getBookAuthor());
@@ -111,6 +92,10 @@ public class InvoiceLineItemService {
 
     public List<InvoiceLineItem> findItemsByInvoice(Invoice invoice) {
         return invoiceLineItemRepo.findByInvoiceId(invoice.getId());
+    }
+
+    public void save(InvoiceLineItem item) {
+        invoiceLineItemRepo.save(item);
     }
 
 }

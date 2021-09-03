@@ -14,5 +14,7 @@ public interface InvoiceLineItemRepo extends CrudRepository<InvoiceLineItem, Int
     List<InvoiceLineItem> findByInvoiceId(int id);
     List<InvoiceLineItem> findByBought(boolean bought);
     void deleteByBought(boolean bought);
+    @Override
+    InvoiceLineItem save(InvoiceLineItem item);
 
 }
