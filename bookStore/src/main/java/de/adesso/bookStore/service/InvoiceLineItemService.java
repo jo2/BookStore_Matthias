@@ -69,23 +69,44 @@ public class InvoiceLineItemService {
     public void buy() {
         List<Book> updatedBooks = new ArrayList<>();
 
-        for (InvoiceLineItem item : findRecentItems()) {
+        List<InvoiceLineItem> recentItems = findRecentItems();
+        if (recentItems.isEmpty()) {
+            return;
+        }
+        for (InvoiceLineItem item : recentItems) {
             Book book = bookService.findByTitleAndAuthor(item.getBookTitle(), item.getBookAuthor());
             Book updatedBook = new Book();
+            boolean alreadyUpadated = false;
+            updatedBook.setAmount(book.getAmount());
+            for (Book alreadyUpdatedBook: updatedBooks) {
+                if (alreadyUpdatedBook.getId() == book.getId()) {
+                    updatedBook = alreadyUpdatedBook;
+                    alreadyUpadated = true;
+                    break;
+                }
+            }
             updatedBook.setId(book.getId());
             updatedBook.setTitle(book.getTitle());
             updatedBook.setAuthor(book.getAuthor());
             updatedBook.setPrice(book.getPrice());
             updatedBook.setYear(book.getYear());
-            updatedBook.setAmount(book.getAmount());
-            if (updatedBook.getAmount() - item.getAmount() < 0) {
+            if (updatedBook.getAmount()- item.getAmount() < 0) {
                 return;
             }
             updatedBook.setAmount(updatedBook.getAmount()- item.getAmount());
+            if (alreadyUpadated) {
+                for (Book alreadyUpdatedBook: updatedBooks) {
+                    if (alreadyUpdatedBook.getId() == book.getId()) {
+                        updatedBooks.remove(alreadyUpdatedBook);
+                        break;
+                    }
+                }
+            }
             updatedBooks.add(updatedBook);
+
         }
         invoiceService.buy();
-        findRecentItems().forEach(item -> {
+        recentItems.forEach(item -> {
             item.setBought(true);
             invoiceLineItemRepo.save(item);
         });

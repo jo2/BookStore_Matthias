@@ -38,8 +38,8 @@ public class InvoiceService {
     }
 
     public List<Invoice> findBoughtInvoices() {
-        List<Invoice> invoices = invoiceRepo.findByIdLessThan(findMaxId());
         int maxId = findMaxId();
+        List<Invoice> invoices = invoiceRepo.findByIdLessThan(maxId);
         Invoice invoice = findById(maxId);
         if (invoice != null && invoiceLineItemService.findRecentItems().isEmpty()) {
             return invoiceRepo.findAll();
@@ -60,16 +60,17 @@ public class InvoiceService {
         return invoiceRepo.findById(id).orElse(null);
     }
 
-    public void buy() {
+    public Invoice buy() {
         int maxId = findMaxId();
         Invoice invoice = findById(maxId);
         if (invoice == null) {
-            return;
+            return null;
         }
         invoice.setInvoiceDate(LocalDate.now());
         invoice.setInvoiceDateTime(LocalTime.now());
         invoice.setInvoiceTotal(invoiceLineItemService.calculateSum(invoiceLineItemService.findRecentItems()));
         invoiceRepo.save(invoice);
+        return invoice;
     }
 
     public List<Invoice> findAll() {
