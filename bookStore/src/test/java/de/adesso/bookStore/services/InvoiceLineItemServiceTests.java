@@ -161,10 +161,12 @@ public class InvoiceLineItemServiceTests {
         item2.setBookAuthor("Author 2");
         item2.setAmount(1);
         Book book1 = new Book();
+        book1.setId(1);
         book1.setTitle("Title 1");
         book1.setAuthor("Author 1");
         book1.setAmount(5);
         Book book2 = new Book();
+        book2.setId(2);
         book2.setAmount(3);
         book2.setTitle("Title 2");
         book2.setAuthor("Author 2");
@@ -175,10 +177,12 @@ public class InvoiceLineItemServiceTests {
         invoiceLineItemService.buy();
 
         Book savedBook1 = new Book();
+        savedBook1.setId(1);
         savedBook1.setAuthor("Author 1");
         savedBook1.setTitle("Title 1");
         savedBook1.setAmount(0);
         Book savedBook2 = new Book();
+        savedBook2.setId(2);
         savedBook2.setAuthor("Author 2");
         savedBook2.setTitle("Title 2");
         savedBook2.setAmount(2);
@@ -236,6 +240,46 @@ public class InvoiceLineItemServiceTests {
         verify(invoiceLineItemRepo).save(savedItem1);
         verify(invoiceLineItemRepo).save(savedItem2);
         verify(bookService).save(savedBook);
+    }
+
+    @Test
+    void testBuyUnsuccessful() {
+        InvoiceLineItem item1 = new InvoiceLineItem();
+        item1.setBookAuthor("Author 1");
+        item1.setBookTitle("Title 1");
+        item1.setAmount(5);
+        InvoiceLineItem item2 = new InvoiceLineItem();
+        item2.setBookTitle("Title 2");
+        item2.setBookAuthor("Author 2");
+        item2.setAmount(1);
+        InvoiceLineItem item3 = new InvoiceLineItem();
+        item3.setBookTitle("Title 2");
+        item3.setBookAuthor("Author 2");
+        item3.setAmount(3);
+        Book book1 = new Book();
+        book1.setId(1);
+        book1.setTitle("Title 1");
+        book1.setAuthor("Author 1");
+        book1.setAmount(5);
+        Book book2 = new Book();
+        book2.setId(2);
+        book2.setAmount(3);
+        book2.setTitle("Title 2");
+        book2.setAuthor("Author 2");
+        when(invoiceLineItemRepo.findByBought(false)).thenReturn(List.of(item1, item2, item3));
+        when(bookService.findByTitleAndAuthor("Title 1", "Author 1")).thenReturn(book1);
+        when(bookService.findByTitleAndAuthor("Title 2", "Author 2")).thenReturn(book2);
+
+        invoiceLineItemService.buy();
+
+        verifyNoInteractions(invoiceService);
+        verify(invoiceLineItemRepo).findByBought(false);
+        verifyNoMoreInteractions(invoiceLineItemRepo);
+        verify(bookService).findByTitleAndAuthor("Title 1", "Author 1");
+        verify(bookService,times(2)).findByTitleAndAuthor("Title 2", "Author 2");
+        verifyNoMoreInteractions(bookService);
+        assertThat(book1.getAmount()).isEqualTo(5);
+        assertThat(book2.getAmount()).isEqualTo(3);
     }
 
     @Test
