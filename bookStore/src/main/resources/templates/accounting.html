@@ -32,7 +32,7 @@
     <div><h3> Accounting </h3></div>
     <div class="card" th:each="invoice: ${invoices}">
         <div class="card-body">
-            <span th:text="${invoice.getInvoiceTotal()} + ': &euro;, Date: ' + ${invoice.getInvoiceDate()} + ' ' + ${invoice.getInvoiceDateTime()}">
+            <span th:text="${invoice.getInvoiceTotal()} + ' &euro;, Date: ' + ${invoice.getInvoiceDate()} + ' ' + ${invoice.getInvoiceDateTime()}">
                 Sum: 45.0 &euro;, Date: 26.08.2021 11:07
             </span>
             <table class="table">

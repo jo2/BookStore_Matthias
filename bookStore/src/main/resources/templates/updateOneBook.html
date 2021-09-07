@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <title>BookStore</title>
     <link crossorigin="anonymous"
@@ -29,8 +29,8 @@
         </div>
     </nav>
 
-    <div><h3> Edit Book_1 </h3></div>
     <form method="post" th:action="@{/updateBook/{id}(id = ${book.getId})}" th:object="${book}">
+        <div><h3>Edit <span th:value="*{title}">Book_1 </span></h3></div>
         <div class="form-row">
             <label> Title </label>
             <input type="text" th:field="*{title}" class="form-control" >
