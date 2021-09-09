@@ -133,10 +133,23 @@ public class InvoiceLineItemServiceTests {
 
     @Test
     void testClearCart() {
+        when(invoiceLineItemRepo.findByBought(false)).thenReturn(List.of(new InvoiceLineItem()));
+
         invoiceLineItemService.clearCart();
 
         verify(invoiceLineItemRepo).deleteByBought(false);
         verify(invoiceService).deleteRecentInvoice();
+    }
+
+    @Test
+    void testClearEmptyCart() {
+        when(invoiceLineItemRepo.findByBought(false)).thenReturn(new ArrayList<>());
+
+        invoiceLineItemService.clearCart();
+
+        verify(invoiceLineItemRepo).findByBought(false);
+        verifyNoMoreInteractions(invoiceLineItemRepo);
+        verifyNoInteractions(invoiceService);
     }
 
     @Test
