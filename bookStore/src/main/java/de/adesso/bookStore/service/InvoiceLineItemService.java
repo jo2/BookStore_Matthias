@@ -62,8 +62,10 @@ public class InvoiceLineItemService {
     }
 
     public void clearCart() {
-        invoiceLineItemRepo.deleteByBought(false);
-        invoiceService.deleteRecentInvoice();
+        if (findRecentItems().size() > 0) {
+            invoiceLineItemRepo.deleteByBought(false);
+            invoiceService.deleteRecentInvoice();
+        }
     }
 
     public void buy() {
