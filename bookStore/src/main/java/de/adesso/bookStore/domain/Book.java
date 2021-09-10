@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
 public class Book {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Size(min=2, max=30)
     private String title;
