@@ -19,14 +19,17 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -173,6 +176,71 @@ public class ControllerIntegrationTests {
                 .andExpect(content().string(containsString("Author1")));
     }
 
+    @Test
+    void updateBook() throws Exception {
+        this.mockMvc.perform(post("/updateBook/901")
+                        .contentType("application/x-www-form-urlencoded")
+                        .content("title=Book1&author=Author1&year=2021&price=10&amount=3"))
+                .andExpect(status().is3xxRedirection());
+        Book book = bookRepo.findById(901);
+        assertThat(book.getYear()).isEqualTo(2021);
+    }
 
+    @Test
+    void createBook() throws Exception {
+        this.mockMvc.perform(post("/createBook")
+                        .contentType("application/x-www-form-urlencoded")
+                        .content("title=Book1&author=Author1&year=2021&price=10&amount=3"))
+                .andExpect(status().is3xxRedirection());
+        int size = bookRepo.findAll().size();
+        assertThat(size).isEqualTo(4);
+    }
+
+    @Test
+    void deleteBook() throws Exception {
+        this.mockMvc.perform(post("/deleteBook/901"))
+                .andExpect(status().is3xxRedirection());
+        int size = bookRepo.findAll().size();
+        assertThat(size).isEqualTo(2);
+        Book book = bookRepo.findById(901);
+        assertThat(book).isNull();
+    }
+
+    @Test
+    void fillShoppingCart() throws Exception {
+        this.mockMvc.perform(post("/shoppingCart/901"))
+                .andExpect(status().is3xxRedirection());
+        int size = invoiceLineItemRepo.findByBought(false).size();
+        assertThat(size).isEqualTo(3);
+    }
+
+    @Test
+    void clearCart() throws Exception {
+        this.mockMvc.perform(post("/clearCart"))
+                .andExpect(status().is3xxRedirection());
+        int size = invoiceLineItemRepo.findByBought(false).size();
+        assertThat(size).isEqualTo(0);
+        int invoiceSize = invoiceRepo.findAll().size();
+        assertThat(invoiceSize).isEqualTo(1);
+    }
+
+    @Test
+    void buy() throws Exception {
+        this.mockMvc.perform(post("/buy"))
+                .andExpect(status().is3xxRedirection());
+        int size = invoiceLineItemRepo.findByBought(false).size();
+        assertThat(size).isEqualTo(0);
+        int invoiceSize = invoiceRepo.findAll().size();
+        assertThat(invoiceSize).isEqualTo(2);
+    }
+
+    @Test
+    void modifyCart() throws Exception {
+        this.mockMvc.perform(post("/modifyCart")
+                .contentType("application/x-www-form-urlencoded")
+                .content("bookTitle=Title9&bookAuthor=Author1&invoiceId=2&bookPrice=20.0&amount=1&summedCosts=40&id=1"));
+        InvoiceLineItem item = invoiceLineItemRepo.findById(1).orElse(null);
+        assertThat(item.getBookTitle()).isEqualTo("Title9");
+    }
 
 }
