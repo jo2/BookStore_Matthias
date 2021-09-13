@@ -122,8 +122,10 @@ public class WebController {
     }
 
     @PostMapping("modifyCart")
-    public String modifyCart(@Valid @ModelAttribute final InvoiceLineItem invoiceLineItem) {
-        invoiceLineItemService.save(invoiceLineItem);
+    public String modifyCart(@Valid @ModelAttribute final InvoiceLineItem invoiceLineItem, final Errors errors) {
+        if (!errors.hasErrors()) {
+            invoiceLineItemService.save(invoiceLineItem);
+        }
         return "redirect:/shoppingCart";
     }
 
