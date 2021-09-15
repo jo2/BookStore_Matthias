@@ -170,7 +170,7 @@ public class ControllerIntegrationTests {
 
     @Test
     void getBookInfo() throws Exception {
-        this.mockMvc.perform(get("/bookInfo/1"))
+        this.mockMvc.perform(get("/bookInfo/901"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Title1")))
                 .andExpect(content().string(containsString("Author1")));
