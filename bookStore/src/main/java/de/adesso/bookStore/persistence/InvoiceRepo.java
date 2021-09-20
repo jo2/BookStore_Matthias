@@ -1,6 +1,5 @@
 package de.adesso.bookStore.persistence;
 
-import de.adesso.bookStore.domain.Book;
 import de.adesso.bookStore.domain.Invoice;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

@@ -1,10 +1,8 @@
 package de.adesso.bookStore.services;
 
-import de.adesso.bookStore.domain.Book;
 import de.adesso.bookStore.domain.Invoice;
 import de.adesso.bookStore.domain.InvoiceLineItem;
 import de.adesso.bookStore.persistence.InvoiceRepo;
-import de.adesso.bookStore.service.BookService;
 import de.adesso.bookStore.service.InvoiceLineItemService;
 import de.adesso.bookStore.service.InvoiceService;
 import org.junit.jupiter.api.Test;
