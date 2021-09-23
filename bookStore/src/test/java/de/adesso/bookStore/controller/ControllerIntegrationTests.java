@@ -51,6 +51,9 @@ public class ControllerIntegrationTests {
 
     @BeforeEach
     void setUp() {
+        bookRepo.deleteAll();
+        invoiceLineItemRepo.deleteAll();
+        invoiceRepo.deleteAll();
         Book book = new Book();
         book.setId(901);
         book.setAmount(3);
@@ -186,7 +189,7 @@ public class ControllerIntegrationTests {
     void createBook() throws Exception {
         this.mockMvc.perform(post("/createBook")
                         .contentType("application/x-www-form-urlencoded")
-                        .content("title=Book1&author=Author1&year=2021&price=10&amount=3"))
+                        .content("title=Book1&author=Author1&year=2021&price=10&amount=3&id=1"))
                 .andExpect(status().is3xxRedirection());
         int size = bookRepo.findAll().size();
         assertThat(size).isEqualTo(4);
